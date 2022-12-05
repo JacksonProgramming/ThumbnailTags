@@ -47,6 +47,15 @@ public class HelloApplication extends Application {
         window.setWidth(200);
         window.show();
 
+        //BUTTON CREATION
+        /*
+        for (String i: genreTest.returnKeySet()) {
+            buttons.getChildren().add(new Button(i));
+            System.out.println(i);
+        }
+        */
+
+
         //LOGIC
         proRev.setOnMouseClicked((event) -> {
             text.setText(genreTest.getGenre("ProRevenge"));
@@ -61,12 +70,6 @@ public class HelloApplication extends Application {
         });
 
 
-    }
-
-    public boolean makeButtons() {
-
-
-        return true;
     }
 
     public String copyToClipboard(String text) {

@@ -2,7 +2,6 @@ package com.example.thumbnailtags;
 
 import java.io.File;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 import java.util.Set;
@@ -35,6 +34,12 @@ public class Genre {
     public String getGenre(String index) {
         return genres.get(index);
     }
+
+
+    public Set<String> returnKeySet() {
+        return genres.keySet();
+    }
+
     /*
     public ArrayList<String> getGenreNames() {
         ArrayList<String> keys = new ArrayList<>();
