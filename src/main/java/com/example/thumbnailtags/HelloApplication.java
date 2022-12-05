@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
@@ -36,6 +37,8 @@ public class HelloApplication extends Application {
         TextField text = new TextField("Press a button");
         text.setPrefHeight(100);
         borderPane.setCenter(text);
+        Label bottomText = new Label("");
+        borderPane.setBottom(bottomText);
 
         Scene scene = new Scene(borderPane);
 
@@ -48,11 +51,13 @@ public class HelloApplication extends Application {
         proRev.setOnMouseClicked((event) -> {
             text.setText(genreTest.getGenre("ProRevenge"));
             copyToClipboard("ProRevenge");
+            bottomText.setText("Pro Revenge tags copied to clipboard!");
         });
 
         IDWHL.setOnMouseClicked((event) -> {
             text.setText(genreTest.getGenre("IDWHL"));
             copyToClipboard("IDWHL");
+            bottomText.setText("IDWHL tags copied to clipboard!");
         });
 
 
