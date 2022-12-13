@@ -1,6 +1,8 @@
 package com.example.thumbnailtags;
 
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -15,8 +17,11 @@ import javafx.stage.Stage;
 import javax.security.auth.login.LoginContext;
 import java.io.IOException;
 
-public class HelloApplication extends Application {
+public class HelloApplication extends Application implements EventHandler<ActionEvent> {
     private Genre genreTest = new Genre("testGenre.txt");
+
+    TextField text = new TextField("Press a button");
+    Label bottomText = new Label("");
 
     @Override
     public void start(Stage window) throws IOException {
@@ -34,10 +39,8 @@ public class HelloApplication extends Application {
         buttons.getChildren().addAll(proRev,IDWHL);
         buttons.setSpacing(5);
         borderPane.setTop(buttons);
-        TextField text = new TextField("Press a button");
         text.setPrefHeight(100);
         borderPane.setCenter(text);
-        Label bottomText = new Label("");
         borderPane.setBottom(bottomText);
 
         Scene scene = new Scene(borderPane);
@@ -48,27 +51,15 @@ public class HelloApplication extends Application {
         window.show();
 
         //BUTTON CREATION
-        /*
         for (String i: genreTest.returnKeySet()) {
             buttons.getChildren().add(new Button(i));
+
             System.out.println(i);
         }
-        */
-
 
         //LOGIC
-        proRev.setOnMouseClicked((event) -> {
-            text.setText(genreTest.getGenre("ProRevenge"));
-            copyToClipboard("ProRevenge");
-            bottomText.setText("Pro Revenge tags copied to clipboard!");
-        });
-
-        IDWHL.setOnMouseClicked((event) -> {
-            text.setText(genreTest.getGenre("IDWHL"));
-            copyToClipboard("IDWHL");
-            bottomText.setText("IDWHL tags copied to clipboard!");
-        });
-
+        proRev.setOnAction(this::handle);
+        IDWHL.setOnAction(this::handle);
 
     }
 
@@ -82,5 +73,14 @@ public class HelloApplication extends Application {
 
     public static void main(String[] args) {
         launch();
+    }
+
+    @Override
+    public void handle(ActionEvent event) {
+        Button button = (Button) event.getSource();
+        System.out.println(button.getText());
+        text.setText(genreTest.getGenre(button.getText().replaceAll(" ","")));
+        copyToClipboard(button.getText().replaceAll(" ",""));
+        bottomText.setText(button.getText() + " tags copied to clipboard!");
     }
 }
