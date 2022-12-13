@@ -16,6 +16,7 @@ import javafx.stage.Stage;
 
 import javax.security.auth.login.LoginContext;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class HelloApplication extends Application implements EventHandler<ActionEvent> {
     private Genre genreTest = new Genre("testGenre.txt");
@@ -34,9 +35,6 @@ public class HelloApplication extends Application implements EventHandler<Action
         //UI
         BorderPane borderPane = new BorderPane();
         HBox buttons = new HBox();
-        Button proRev = new Button("Pro Revenge");
-        Button IDWHL = new Button("IDWHL");
-        buttons.getChildren().addAll(proRev,IDWHL);
         buttons.setSpacing(5);
         borderPane.setTop(buttons);
         text.setPrefHeight(100);
@@ -50,16 +48,13 @@ public class HelloApplication extends Application implements EventHandler<Action
         window.setWidth(200);
         window.show();
 
-        //BUTTON CREATION
+        //BUTTON CREATION & LOGIC
         for (String i: genreTest.returnKeySet()) {
-            buttons.getChildren().add(new Button(i));
-
+            Button button = new Button(i);
+            buttons.getChildren().add(button);
+            button.setOnAction(this::handle);
             System.out.println(i);
         }
-
-        //LOGIC
-        proRev.setOnAction(this::handle);
-        IDWHL.setOnAction(this::handle);
 
     }
 
