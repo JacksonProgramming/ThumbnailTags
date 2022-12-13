@@ -73,7 +73,6 @@ public class HelloApplication extends Application implements EventHandler<Action
     @Override
     public void handle(ActionEvent event) {
         Button button = (Button) event.getSource();
-        System.out.println(button.getText());
         text.setText(genreTest.getGenre(button.getText().replaceAll(" ","")));
         copyToClipboard(button.getText().replaceAll(" ",""));
         bottomText.setText(button.getText() + " tags copied to clipboard!");
